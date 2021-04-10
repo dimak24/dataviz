@@ -6,5 +6,5 @@
 ### Usage example
 
 ```sh
-python3 main.py --input='your file' --output='graph' && xdg-open 'graph.png'
+python3 main.py --input='your file' --output='graph' --alg='coffmat-graham' --params='{\"W\": 2}' && xdg-open 'graph.png'
 ```
