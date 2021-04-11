@@ -171,7 +171,7 @@ class CoffmanGrahamDrawer(Drawer):
         res = spopt.linprog(c, bounds=(0, np.inf), A_ub=A_ub, b_ub=-np.ones(shape=(1, A_ub.shape[0])))
         res.x -= max(res.x)
         res.x *= -1
-        x = [round(xi) for xi in res.x]
+        x = [int(round(xi)) for xi in res.x]
 
         layers = [[] for _ in range(max(x) + 1)]
         node_layer = dict()
@@ -215,7 +215,7 @@ class CoffmanGrahamDrawer(Drawer):
                 if i > 0 and x < xs[i - 1] + 1:
                     xs[i:] += (1 - x + xs[i - 1])
             for idx, x in zip(indices, xs):
-                self.coords[layer[idx]] = (x, -y)
+                self.coords[layer[idx]] = (x, y)
 
     def __init__(self, graph: DAG, W: int=0):
         super().__init__(graph)
