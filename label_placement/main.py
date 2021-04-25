@@ -128,10 +128,10 @@ def draw_labels(labels, output='labels'):
     g = Digraph('G', filename=output, format='png', engine="neato")
     for (x, y), (w, h), (dx, dy) in labels:
         g.node(gen_id(), label='',
-               shape='point', width='1', fixedsize='true',
+               shape='point', width='.1',
                pos=f'{x},{y}!')
         g.node(gen_id(), label='',
-               shape='box', penwidth='6', width=str(w), height=str(h), fixedsize='true',
+               shape='box', penwidth='.6', width=str(w), height=str(h),
                pos=f'{x - dx + w / 2},{y - dy + h / 2}!')
     g.render()
 
@@ -140,7 +140,7 @@ filename = sys.argv[1]
 with open(filename, 'r') as file:
     for line in file:
         xy, wh, d = line.split('\t')
-        parse_coords = lambda xy: tuple(map(float, xy.split(',')))
+        parse_coords = lambda xy: tuple(map(lambda x: float(x) / 10, xy.split(',')))
         labels.append((parse_coords(xy), parse_coords(wh), list(map(parse_coords, d.split()))))
 result = label_placement(labels)
 if result:
